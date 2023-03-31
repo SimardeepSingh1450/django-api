@@ -3,15 +3,19 @@
 
 {%block content%}
 <h1>{{ls.name}}</h1>
-<ul>
 {%for item in ls.item_set.all %}
-    {%if item.complete == False%}
-    <li><input type="checkbox", value="clicked", name="c{{item.id}}"/>{{item.text}}<li>
-    {% elif item.complete == True%}
-    <li><input type="checkbox", value="clicked", name="c{{item.id}}" checked/>{{item.text}}<li>
-        {% endif %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            {%if item.complete == False%}
+            <input type="checkbox", value="clicked", name="c{{item.id}}"/>{{item.text}}
+            {% elif item.complete == True%}
+            <input type="checkbox", value="clicked", name="c{{item.id}}" checked/>{{item.text}}
+            {% endif %}
+        </div>
+            <input type="text" , value="{{item.text}}" class="form-control"/>
+    </div>
 {%endfor%}
-</ul>
+
 
 <form method="POST" action="#">
     {%csrf_token%}
